@@ -24,7 +24,7 @@ def getproduct(msg='1'):
     if msg==1:
         cur.execute("select * from product");
     else:
-        cur.execute("select name,prices from product where name like '%{}%' ".format(msg));
+        cur.execute("select name,price from product where name like '%{}%' ".format(msg));
     rows=cur.fetchall();
     content='2';
     for r in rows:
