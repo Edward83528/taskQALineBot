@@ -61,7 +61,8 @@ def handle_message(event):
         status=2;
     elif "眼鏡" in msg:
         txt=function.getproduct();
-            
+    elif "花" in msg:
+        txt=function.gettest();
     else:
          txt=getTextKey(msg);
         #txt=event.message.text;
