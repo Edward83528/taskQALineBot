@@ -51,9 +51,11 @@ def callback():
     return 'OK'
 
 glasses=0;
+air=0;
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     global glasses;
+    global air;
     status=1;
     msg=event.message.text;
     
@@ -65,16 +67,21 @@ def handle_message(event):
     elif "眼鏡" in msg:
         glasses=1;
         txt=function.getproduct();
+    elif "空氣" in msg:
+        air=1;
+        txt='請輸入地區';
     elif "測試" in msg:
         txt=function.gettest();
     else:
         if glasses==1:
             txt=function.getproduct(msg);
             glasses=0;
+        elif air==1:
+            txt=function.getOpenData_pm25(msg);
+            air=0;
         else:
             txt=getTextKey(msg);
         #txt=event.message.text;
-    
     if status==1:
         message = TextSendMessage(text=txt);
 

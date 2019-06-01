@@ -4,16 +4,42 @@ Created on Sat May 18 19:35:53 2019
 
 @author: User
 """
+#爬網站資料需要
 import json;
 import requests;
+#postgresql
 import psycopg2;
+#postgresql資料庫資訊
 databases='ddr93dv9ort6eb';
 users='gxtkhrtqoowrme';
 passwords='c7602a59c8758ad0515037079e38be4e08cf7a7e44a42599e539359b2da9b9cb';
 hosts='ec2-54-225-106-93.compute-1.amazonaws.com';
 ports='5432';
 def getOpenData(url):
-    return json.loads(requests.get(url).text);
+    return json.loads(requests.get(url,verify='False').text);
+def getOpenData_pm25(area):
+    url='http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&$skip=0&$top=1000&format=json';
+    #verify='False':遇https不驗證ssl
+    response=json.loads(requests.get(url,verify='False').text);
+    site=[];
+    aqi=[];
+    for stat in response:
+        site.append(stat['SiteName']);
+        aqi.append(stat['AQI']);
+    #兩個串列併成一個字典(key value)
+    data=dict(zip(site,aqi));
+    score=data.get(area,"0");
+    if score!='0':
+        value=int(score);
+        if value<=50:
+            score="綠燈";
+        elif value<=100:
+            score="黃燈";
+        elif value<=150:
+            score="橘燈";
+        else:
+            score="紅燈";
+    return score;
 def Dateformat(str):
     return str[0:4]+"-"+ str[4:6]+"-"+ str[6:8];
 def gettest():
