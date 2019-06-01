@@ -59,8 +59,8 @@ def handle_message(event):
     elif "蠟筆小新" in msg:
         message=ImageSendMessage(original_content_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg',preview_image_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg');
         status=2;
-     elif "眼鏡" in msg:
-         txt=function.getproduct();
+    elif "眼鏡" in msg:
+        txt=function.getproduct();
             
     else:
          txt=getTextKey(msg);
