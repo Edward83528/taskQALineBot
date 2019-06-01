@@ -49,14 +49,15 @@ def callback():
 
     return 'OK'
 
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg=event.message.text;
     if "垃圾車" in msg:
         txt=getrubbishtruck();
     else:
-        txt=event.message.text;
+         txt=getTextKey(msg);
+        #txt=event.message.text;
+       
     message = TextSendMessage(text=txt)
     line_bot_api.reply_message(
         event.reply_token,
