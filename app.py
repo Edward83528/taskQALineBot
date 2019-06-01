@@ -49,8 +49,11 @@ def callback():
         abort(400)
 
     return 'OK'
+
+glasses=0;
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    global glasses;
     status=1;
     msg=event.message.text;
     
@@ -60,15 +63,20 @@ def handle_message(event):
         message=ImageSendMessage(original_content_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg',preview_image_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg');
         status=2;
     elif "眼鏡" in msg:
+        glasses=1;
         txt=function.getproduct();
-    elif "花" in msg:
+    elif "測試" in msg:
         txt=function.gettest();
     else:
          txt=getTextKey(msg);
         #txt=event.message.text;
     
     if status==1:
-        message = TextSendMessage(text=txt);
+        if glasses==1:
+            txt=function.getproduct(msg);
+            glasses=0;
+
+    message = TextSendMessage(text=txt);
         
     
     line_bot_api.reply_message(

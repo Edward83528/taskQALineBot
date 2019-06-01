@@ -17,14 +17,17 @@ def getOpenData(url):
 def Dateformat(str):
     return str[0:4]+"-"+ str[4:6]+"-"+ str[6:8];
 def gettest():
-    return '測試';
-def getproduct():
+    return '測試成功';
+def getproduct(msg=1):
     conn=psycopg2.connect(database="ddr93dv9ort6eb",user="gxtkhrtqoowrme",password="c7602a59c8758ad0515037079e38be4e08cf7a7e44a42599e539359b2da9b9cb",host="ec2-54-225-106-93.compute-1.amazonaws.com",port="5432");
     cur=conn.cursor();
-    cur.execute("select * from product");
+    if msg==1:
+        cur.execute("select * from product");
+    else:
+        cur.execute("select name,prices from product where name like '%{}%' ".format(msg));
     rows=cur.fetchall();
     content='2';
     for r in rows:
-        content=content+r[0]+"\n"+r[1];
+        content=content+r[1]+"\n";
     conn.close();
     return content;
