@@ -59,6 +59,8 @@ def handle_message(event):
     elif "蠟筆小新" in msg:
         message=ImageSendMessage(original_content_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg',preview_image_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg');
         status=2;
+     elif "眼鏡" in msg:
+         txt=function.getproduct();
             
     else:
          txt=getTextKey(msg);
@@ -75,6 +77,7 @@ def handle_message(event):
 import os
 import requests;
 import json;
+import function;
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
