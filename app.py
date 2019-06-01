@@ -25,6 +25,7 @@ def getrubbishtruck():
     for row in response:
         content+="垃圾車:"+row["car"]+"-"+row["location"]+"\n";
     return content;
+#用字典的方式去抓關鍵字
 def getTextKey(text):
     content={
             "中興":"一所很好的大學",
@@ -48,17 +49,24 @@ def callback():
         abort(400)
 
     return 'OK'
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    status=1;
     msg=event.message.text;
+    
     if "垃圾車" in msg:
         txt=getrubbishtruck();
+    elif "蠟筆小新" in msg:
+        message=ImageSendMessage(original_content_url='',preview_image_url='');
+        status=2;
+            
     else:
          txt=getTextKey(msg);
         #txt=event.message.text;
-       
-    message = TextSendMessage(text=txt)
+    
+    if status==1:
+    message = TextSendMessage(text=txt);
+    
     line_bot_api.reply_message(
         event.reply_token,
         message)
