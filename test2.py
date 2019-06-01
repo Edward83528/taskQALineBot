@@ -7,5 +7,5 @@ Created on Sat Jun  1 14:10:40 2019
 
 import function;
 
-txt=function.getproduct('兒童');
+txt=function.getproduct();
 print(txt);
