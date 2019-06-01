@@ -18,17 +18,17 @@ def Dateformat(str):
     return str[0:4]+"-"+ str[4:6]+"-"+ str[6:8];
 def gettest():
     return '測試成功';
-def getproduct(msg='1'):
+def getproduct(msg=1):
     conn=psycopg2.connect(database="ddr93dv9ort6eb",user="gxtkhrtqoowrme",password="c7602a59c8758ad0515037079e38be4e08cf7a7e44a42599e539359b2da9b9cb",host="ec2-54-225-106-93.compute-1.amazonaws.com",port="5432");
     cur=conn.cursor();
-    if msg=='1':
+    if msg==1:
         print('a');
         cur.execute("select * from product");
     else:
         print('b');
         cur.execute("select name,price from product where name like '%{}%' ".format(msg));
     rows=cur.fetchall();
-    content='2';
+    content='';
     for r in rows:
         content=content+str(r[1])+"\n";
     conn.close();
