@@ -25,7 +25,12 @@ def getrubbishtruck():
     for row in response:
         content+="垃圾車:"+row["car"]+"-"+row["location"]+"\n";
     return content;
-
+def getTextKey(text):
+    content={
+            "中興":"一所很好的大學",
+            "空污":"請輸入空氣品質抓取",
+            };
+    return content.get(text,"我也不知道");
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
