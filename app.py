@@ -68,17 +68,15 @@ def handle_message(event):
     elif "測試" in msg:
         txt=function.gettest();
     else:
-         txt=getTextKey(msg);
-        #txt=event.message.text;
-    
-    if status==1:
         if glasses==1:
             txt=function.getproduct(msg);
             glasses=0;
-
-    message = TextSendMessage(text=txt);
-        
+        txt=getTextKey(msg);
+        #txt=event.message.text;
     
+    if status==1:
+        message = TextSendMessage(text=txt);
+
     line_bot_api.reply_message(
         event.reply_token,
         message)
