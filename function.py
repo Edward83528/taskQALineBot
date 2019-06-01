@@ -25,3 +25,4 @@ def getproduct():
     for r in rows:
         content=content+r[0]+"\n"+r[1];
     conn.close();
+    return content;
