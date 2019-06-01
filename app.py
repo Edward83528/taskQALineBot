@@ -71,7 +71,8 @@ def handle_message(event):
         if glasses==1:
             txt=function.getproduct(msg);
             glasses=0;
-        txt=getTextKey(msg);
+        else:
+            txt=getTextKey(msg);
         #txt=event.message.text;
     
     if status==1:
