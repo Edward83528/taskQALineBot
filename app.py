@@ -57,7 +57,7 @@ def handle_message(event):
     if "垃圾車" in msg:
         txt=getrubbishtruck();
     elif "蠟筆小新" in msg:
-        message=ImageSendMessage(original_content_url='',preview_image_url='');
+        message=ImageSendMessage(original_content_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg',preview_image_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg');
         status=2;
             
     else:
@@ -65,7 +65,8 @@ def handle_message(event):
         #txt=event.message.text;
     
     if status==1:
-    message = TextSendMessage(text=txt);
+        message = TextSendMessage(text=txt);
+        
     
     line_bot_api.reply_message(
         event.reply_token,
