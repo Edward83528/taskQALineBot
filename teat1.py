@@ -10,6 +10,6 @@ conn=psycopg2.connect(database="ddr93dv9ort6eb",user="gxtkhrtqoowrme",password="
 createsql="create table product(id serial primary key,name varchar(50),price int)";
 cur=conn.cursor();
 cur.execute(createsql);
-cur.commit();
+conn.commit();
 conn.close();
 print("連線成功喔");
