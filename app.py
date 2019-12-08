@@ -62,7 +62,7 @@ def handle_message(event):
     if "垃圾車" in msg:
         txt=getrubbishtruck();
     elif "蠟筆小新" in msg:
-        message=ImageSendMessage(original_content_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg',preview_image_url='https://i.ytimg.com/vi/7JU5KAgEHCY/maxresdefault.jpg');
+        message=ImageSendMessage(original_content_url='https://images.app.goo.gl/sdJMyoZU1BFejHCDA',preview_image_url='https://images.app.goo.gl/sdJMyoZU1BFejHCDA');
         status=2;
     elif "眼鏡" in msg:
         glasses=1;
