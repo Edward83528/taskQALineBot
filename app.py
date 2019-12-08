@@ -13,9 +13,9 @@ from linebot.models import (
 app = Flask(__name__)
 
 # Channel Access Token
-line_bot_api = LineBotApi('58xsi39XnfzoMg+F45Et9YImICtIsCQ4q+XENgloI2lP6eX/C5UBvycT9VuvPHFT5WdMTPQH3zdBbZp6XEfNig/xjm1f1gru62E/RkWqj19edVFazU8YYiu22P+6lJBXdGAKR0YAvoSvL9L9fCkr4QdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('l8sFNsaVP1oRQiHCGf7TESDov5PaIR/34JzmKLGj5D9jUZmbi+XE3JtqfCoI8MNK33mC3NH3RTjL/w7Zxvn2CmGJ+ie9+a17NAmNESzNIg9MErJ10OG/GZErXv5CDBxus7qwZyoLm5uKTEXevujn2wdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
-handler = WebhookHandler('a47997ec5d862f32608fe9b4fb55271c')
+handler = WebhookHandler('fcf5a0840972af3aaeef71903221ef58')
 
 #抓垃圾車資訊
 def getrubbishtruck():

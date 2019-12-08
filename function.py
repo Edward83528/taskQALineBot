@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 18 19:35:53 2019
+API集
 
-@author: User
+@author: 張仲威
 """
 #爬網站資料需要
 import json;
