@@ -69,7 +69,7 @@ def handle_message(event):
         txt=function.getproduct();
     elif "空氣" in msg:
         air=1;
-        txt='請輸入地區';
+        txt='請輸入地區(例如:大里)';
     elif "測試" in msg:
         txt=function.gettest();
     else:
