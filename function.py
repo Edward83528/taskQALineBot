@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 API集
-
 @author: 張仲威
 """
 #爬網站資料需要
@@ -59,3 +58,18 @@ def getproduct(msg=1):
         content=content+str(r[1])+"\n";
     conn.close();
     return content;
+#抓垃圾車資訊
+def getrubbishtruck():
+    url="https://data.ntpc.gov.tw/od/data/api/28AB4122-60E1-4065-98E5-ABCCB69AACA6?$format=json";
+    response=json.loads(requests.get(url).text);
+    content="";
+    for row in response:
+        content+="垃圾車:"+row["car"]+"-"+row["location"]+"\n";
+    return content;
+#用字典的方式去抓關鍵字
+def getTextKey(text):
+    content={
+            "中興":"一所很好的大學",
+            "空污":"請輸入空氣品質抓取",
+            };
+    return content.get(text,"我也不知道");

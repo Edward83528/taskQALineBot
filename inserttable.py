@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 新增產品資料
-
 @author: 張仲威
 """
 import psycopg2;
