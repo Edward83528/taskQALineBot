@@ -65,7 +65,7 @@ def handle_message(event):
             txt=function.getOpenData_pm25(msg);
             air=0;
         else:
-            txt=getTextKey(msg);
+            txt=function.getTextKey(msg);
         #txt=event.message.text;
     if status==1:
         message = TextSendMessage(text=txt);
