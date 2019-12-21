@@ -1,4 +1,4 @@
-from flask import Flask, request, abort
+from flask import Flask, request, abort,render_template
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -10,6 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 )
 
+#創建一個falsk對象
 app = Flask(__name__)
 
 # Channel Access Token
@@ -34,6 +35,11 @@ def callback():
         abort(400)
 
     return 'OK'
+
+#跳轉首頁
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 glasses=0;
 air=0;
