@@ -50,7 +50,6 @@ air=0;
 def handle_message(event):
     global glasses;
     global air;
-    global xi;
     status=1;
     msg=event.message.text;
     
