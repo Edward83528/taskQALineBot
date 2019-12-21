@@ -6,6 +6,8 @@ API集
 #爬網站資料需要
 import json;
 import requests;
+import numpy as np
+from vectorizer import vect;
 #postgresql
 import psycopg2;
 #postgresql資料庫資訊
@@ -66,6 +68,19 @@ def getrubbishtruck():
     for row in response:
         content+="垃圾車:"+row["car"]+"-"+row["location"]+"\n";
     return content;
+#獲取評論的分類結果
+def classify_review(review,clf):
+    label = {0:"negative",1:"positive"}
+    #將評論轉成特徵向量
+    X = vect.transform(review)
+    #獲取評論整數類標
+    Y = clf.predict(X)[0]
+    #獲取評論字符串類標
+    label_Y = label[Y]
+    #獲取評論所屬類別概率
+    proba = np.max(clf.predict_proba(X))
+    return Y,label_Y,proba
+
 #用字典的方式去抓關鍵字
 def getTextKey(text):
     content={
