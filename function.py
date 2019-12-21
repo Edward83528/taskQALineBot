@@ -72,7 +72,7 @@ def getrubbishtruck():
 def classify_review(review,clf):
     label = {0:"negative",1:"positive"}
     #將評論轉成特徵向量
-    X = vect.transform(review)
+    X = vect.transform([review])
     #獲取評論整數類標
     Y = clf.predict(X)[0]
     #獲取評論字符串類標
