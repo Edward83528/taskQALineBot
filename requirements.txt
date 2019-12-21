@@ -3,5 +3,4 @@ flask
 psycopg2
 matplotlib
 beautifulsoup4
-pickle
-sklearn
+scikit-learn
