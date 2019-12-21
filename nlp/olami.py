@@ -29,8 +29,7 @@ class Olami:
         response.raise_for_status()
         response_json = response.json()
         if response_json['status'] != 'ok':
-            raise NliStatusError(
-                "NLI responded status != 'ok': {}".format(response_json['status']))
+            raise NliStatusError("NLI responded status != 'ok': {}".format(response_json['status']))
         else:
             nli_obj = response_json['data']['nli'][0]
             return self.intent_detection(nli_obj)
@@ -47,8 +46,8 @@ class Olami:
         return params
 
     def _gen_sign(self, api, timestamp_ms):
-        data = self.app_secret + 'api=' + api + 'appkey=' + self.app_key + \
-               'timestamp=' + str(timestamp_ms) + self.app_secret
+        data = self.app_secret + 'api=' + api + 'appkey=' + self.app_key + 'timestamp=' + \
+               str(timestamp_ms) + self.app_secret
         return md5(data.encode('ascii')).hexdigest()
 
     def _gen_rq(self, text):
@@ -57,30 +56,36 @@ class Olami:
 
     def intent_detection(self, nli_obj):
         def handle_selection_type(type):
-            reply = {
-                'news': lambda: desc['result'] + '\n\n' + '\n'.join(
-                    str(index + 1) + '. ' + el['title'] for index, el in enumerate(data)),
-                'poem': lambda: desc['result'] + '\n\n' + '\n'.join(
-                    str(index + 1) + '. ' + el['poem_name'] + '，作者：' + el['author'] for index, el in
-                    enumerate(data)),
-                'cooking': lambda: desc['result'] + '\n\n' + '\n'.join(
-                    str(index + 1) + '. ' + el['name'] for index, el in
-                    enumerate(data))
-            }.get(type, lambda: '對不起，你說的我還不懂，能換個說法嗎？')()
-            return reply
+            if type == 'news':
+                return desc['result'] + '\n\n' + '\n'.join(
+                    str(index + 1) + '. ' + el['title'] for index, el in enumerate(data))
+            elif type == 'poem':
+                return desc['result'] + '\n\n' + '\n'.join(
+                    str(index + 1) + '. ' + el['poem_name'] + '，作者：' + el['author'] for index, el in enumerate(data))
+            elif type == 'cooking':
+                return desc['result'] + '\n\n' + '\n'.join(
+                    str(index + 1) + '. ' + el['name'] for index, el in enumerate(data))
+            else:
+                return '對不起，你說的我還不懂，能換個說法嗎？'
 
         type = nli_obj['type']
         desc = nli_obj['desc_obj']
         data = nli_obj.get('data_obj', [])
 
-        reply = {
-            'kkbox': lambda: data[0]['url'] if len(data) > 0 else desc['result'],
-            'baike': lambda: data[0]['description'],
-            'news': lambda: data[0]['detail'],
-            'joke': lambda: data[0]['content'],
-            'cooking': lambda: data[0]['content'],
-            'selection': lambda: handle_selection_type(desc['type']),
-            'ds': lambda: desc['result'] + '\n請用 /help 指令看看我能怎麼幫助您'
-        }.get(type, lambda: desc['result'])()
-
-        return reply
+        if type == 'kkbox':
+            id = data[0]['id']
+            return ('https://widget.kkbox.com/v1/?type=song&id=' + id) if len(data) > 0 else desc['result']
+        elif type == 'baike':
+            return data[0]['description']
+        elif type == 'joke':
+            return data[0]['content']
+        elif type == 'news':
+            return data[0]['detail']
+        elif type == 'cooking':
+            return data[0]['content']
+        elif type == 'selection':
+            return handle_selection_type(desc['type'])
+        elif type == 'ds':
+            return desc['result'] + '\n請用 /help 指令看看我能怎麼幫助您'
+        else:
+            return desc['result']
