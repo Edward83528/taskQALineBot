@@ -4,3 +4,4 @@ psycopg2
 matplotlib
 beautifulsoup4
 scikit-learn
+nltk
