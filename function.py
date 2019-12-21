@@ -79,7 +79,8 @@ def classify_review(review,clf):
     label_Y = label[Y]
     #獲取評論所屬類別概率
     proba = np.max(clf.predict_proba(X))
-    return Y,label_Y,proba
+    #return Y,label_Y,proba
+    return label_Y
 
 #用字典的方式去抓關鍵字
 def getTextKey(text):
