@@ -69,7 +69,7 @@ def getrubbishtruck():
 #用字典的方式去抓關鍵字
 def getTextKey(text):
     content={
-            "中興":"一所很好的大學",
+            "中興":"一所很好的大學喔",
             "空污":"請輸入空氣品質抓取",
             };
     return content.get(text,"我也不知道");
