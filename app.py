@@ -1,4 +1,5 @@
 from flask import Flask, request, abort,render_template
+from nlp.olami import Olami
 import pickle
 
 from linebot import (
