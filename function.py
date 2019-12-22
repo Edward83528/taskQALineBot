@@ -7,15 +7,22 @@ API集
 import json;
 import requests;
 import numpy as np
+import configparser
 from vectorizer import vect;
+
+#讀取設定檔
+config = configparser.ConfigParser()
+config.read('config.ini')
+
 #postgresql
 import psycopg2;
 #postgresql資料庫資訊
-databases='ddr93dv9ort6eb';
-users='gxtkhrtqoowrme';
-passwords='c7602a59c8758ad0515037079e38be4e08cf7a7e44a42599e539359b2da9b9cb';
-hosts='ec2-54-225-106-93.compute-1.amazonaws.com';
-ports='5432';
+database=config['Postgresql']['database'];
+user=config['Postgresql']['user'];
+password=config['Postgresql']['password'];
+host=config['Postgresql']['host'];
+port=config['Postgresql']['port'];
+
 def getOpenData(url):
     return json.loads(requests.get(url,verify='False').text);
 def getOpenData_pm25(area):
@@ -46,7 +53,7 @@ def Dateformat(str):
 def gettest():
     return '測試成功';
 def getproduct(msg=1):
-    conn=psycopg2.connect(database="ddr93dv9ort6eb",user="gxtkhrtqoowrme",password="c7602a59c8758ad0515037079e38be4e08cf7a7e44a42599e539359b2da9b9cb",host="ec2-54-225-106-93.compute-1.amazonaws.com",port="5432");
+    conn=psycopg2.connect(database=database,user=user,password=password,host=host,port=port);
     cur=conn.cursor();
     if msg==1:
         print('a');
