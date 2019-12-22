@@ -1,6 +1,7 @@
 from flask import Flask, request, abort,render_template
 from nlp.olami import Olami
 import pickle
+import configparser
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -16,11 +17,13 @@ from linebot.models import (
 app = Flask(__name__)
 #載入分類模型
 clf = pickle.load(open("pkl/classifier.pkl","rb"))
-
+#讀取設定檔
+config = configparser.ConfigParser()
+config.read('config.ini')
 # Channel Access Token
-line_bot_api = LineBotApi('l8sFNsaVP1oRQiHCGf7TESDov5PaIR/34JzmKLGj5D9jUZmbi+XE3JtqfCoI8MNK33mC3NH3RTjL/w7Zxvn2CmGJ+ie9+a17NAmNESzNIg9MErJ10OG/GZErXv5CDBxus7qwZyoLm5uKTEXevujn2wdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(config['Line']['token'])
 # Channel Secret
-handler = WebhookHandler('fcf5a0840972af3aaeef71903221ef58')
+handler = WebhookHandler(config['Line']['Channe_SECRET'])
 
 #跳轉首頁
 @app.route("/")

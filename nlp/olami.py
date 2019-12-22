@@ -3,9 +3,9 @@ import json
 import logging
 import time
 from hashlib import md5
-
 import requests
 
+#讀取設定檔
 config = configparser.ConfigParser()
 config.read('config.ini')
 
