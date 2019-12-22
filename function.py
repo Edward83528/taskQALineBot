@@ -3,19 +3,17 @@
 API集
 @author: 張仲威
 """
-#爬網站資料需要
-import json;
-import requests;
-import numpy as np
-import configparser
+import json; #爬網站資料格式需要
+import requests; #爬網站資料需要
+import numpy as np;
+import configparser; #讀取設定檔
 from vectorizer import vect;
+import psycopg2; #postgresql
 
 #讀取設定檔
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-#postgresql
-import psycopg2;
 #postgresql資料庫資訊
 database=config['Postgresql']['database'];
 user=config['Postgresql']['user'];

@@ -15,8 +15,6 @@ from linebot.models import (
 
 #創建一個falsk對象
 app = Flask(__name__)
-#載入分類模型
-clf = pickle.load(open("pkl/classifier.pkl","rb"))
 #讀取設定檔
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -24,6 +22,8 @@ config.read('config.ini')
 line_bot_api = LineBotApi(config['Line']['token'])
 # Channel Secret
 handler = WebhookHandler(config['Line']['Channe_SECRET'])
+#載入分類模型(可替換)
+clf = pickle.load(open("pkl/classifier.pkl","rb"))
 
 #跳轉首頁
 @app.route("/")
@@ -60,7 +60,8 @@ def handle_message(event):
     if "垃圾車" in msg:
         txt=function.getrubbishtruck();
     elif "蠟筆小新" in msg:
-        message=ImageSendMessage(original_content_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3fsAvfV91zePne1n1RzxuxhnKyQEXUSEVFvYvZAiHqzPJUhlIJQ&s',preview_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3fsAvfV91zePne1n1RzxuxhnKyQEXUSEVFvYvZAiHqzPJUhlIJQ&s');
+        message=ImageSendMessage(original_content_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3fsAvfV91zePne1n1RzxuxhnKyQEXUSEVFvYvZAiHqzPJUhlIJQ&s',
+                                 preview_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3fsAvfV91zePne1n1RzxuxhnKyQEXUSEVFvYvZAiHqzPJUhlIJQ&s');
         status=2;
     elif "眼鏡" in msg:
         glasses=1;
@@ -80,8 +81,8 @@ def handle_message(event):
             txt=function.getOpenData_pm25(msg);
             air=0;
         else:
-            #txt=function.getTextKey(msg);
-            txt=Olami().nli(msg)
+            #txt=function.getTextKey(msg); # 用字典的方式去抓關鍵字
+            txt=Olami().nli(msg) #用威聖電子API
         #txt=event.message.text;
     if status==1:
         message = TextSendMessage(text=txt);

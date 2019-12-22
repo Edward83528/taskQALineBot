@@ -10,4 +10,4 @@ cur=conn.cursor();
 cur.execute(createsql);
 conn.commit();
 conn.close();
-print("連線成功喔");
+print("連線成功");
