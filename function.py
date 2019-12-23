@@ -75,14 +75,14 @@ def getrubbishtruck():
     return content;
 #介接微軟qnamaker
 def get_answer(message_text):
-    url = "https://taskudic.azurewebsites.net/qnamaker/knowledgebases/69d9a0dc-5394-40fb-9789-725a309e877f/generateAnswer"
+    url = config['Qnamaker']['url']
     # 發送request到QnAMaker Endpoint要答案
     response = requests.post(
                    url,
                    json.dumps({'question': message_text}),
                    headers={
                        'Content-Type': 'application/json',
-                       'Authorization': 'EndpointKey 6641f56a-7bae-4b95-b065-f44722b795a2'
+                       'Authorization': config['Qnamaker']['Authorization']
                    }
                )
     data = response.json()
