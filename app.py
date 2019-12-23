@@ -82,7 +82,8 @@ def handle_message(event):
             air=0;
         else:
             #txt=function.getTextKey(msg); # 用字典的方式去抓關鍵字
-            txt=Olami().nli(msg) #用威聖電子API
+            #txt=Olami().nli(msg) #用威聖電子API
+            txt=function.get_answer(msg) #用微軟qnamaker
         #txt=event.message.text;
     if status==1:
         message = TextSendMessage(text=txt);

@@ -73,6 +73,28 @@ def getrubbishtruck():
     for row in response:
         content+="垃圾車:"+row["car"]+"-"+row["location"]+"\n";
     return content;
+#介接微軟qnamaker
+def get_answer(message_text):
+    url = "https://taskudic.azurewebsites.net/qnamaker/knowledgebases/69d9a0dc-5394-40fb-9789-725a309e877f/generateAnswer"
+    # 發送request到QnAMaker Endpoint要答案
+    response = requests.post(
+                   url,
+                   json.dumps({'question': message_text}),
+                   headers={
+                       'Content-Type': 'application/json',
+                       'Authorization': 'EndpointKey 6641f56a-7bae-4b95-b065-f44722b795a2'
+                   }
+               )
+    data = response.json()
+    try: 
+        #我們使用免費service可能會超過限制（一秒可以發的request數）
+        if "error" in data:
+            return data["error"]["message"]
+        #這裡我們預設取第一個答案
+        answer = data['answers'][0]['answer']
+        return answer
+    except Exception:
+        return "找答案過程發生錯誤"
 #獲取評論的分類結果
 def classify_review(review,clf):
     label = {0:"negative",1:"positive"}
@@ -86,7 +108,6 @@ def classify_review(review,clf):
     proba = np.max(clf.predict_proba(X))
     #return Y,label_Y,proba
     return label_Y
-
 #用字典的方式去抓關鍵字
 def getTextKey(text):
     content={
