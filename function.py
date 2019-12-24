@@ -94,7 +94,7 @@ def get_answer(message_text):
         answer = data['answers'][0]['answer']
         return answer
     except Exception:
-        return "找答案過程發生錯誤"
+        return "不好意思，系統發生錯誤，請稍後再試"
 #獲取評論的分類結果
 def classify_review(review,clf):
     label = {0:"negative",1:"positive"}
