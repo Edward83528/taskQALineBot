@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 API集
-@author: 張仲威
+@author: Zhong-wei
 """
+import numpy as np;
 import json; #爬網站資料格式需要
 import requests; #爬網站資料需要
-import numpy as np;
 import configparser; #讀取設定檔
-from vectorizer import vect;
 import psycopg2; #postgresql
+from vectorizer import vect;
 
 #讀取設定檔
 config = configparser.ConfigParser()

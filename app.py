@@ -1,7 +1,7 @@
 from flask import Flask, request, abort,render_template
-from nlp.olami import Olami
+from nlp.olami import Olami #用威聖電子API
+import configparser #讀取設定檔
 import pickle
-import configparser
 
 from linebot import (
     LineBotApi, WebhookHandler

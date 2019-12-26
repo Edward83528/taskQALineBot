@@ -1,13 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-新增產品資料表
-@author: 張仲威
+新增QA資料表
+@author: Zhong-wei
 """
-import psycopg2;
-conn=psycopg2.connect(database="ddr93dv9ort6eb",user="gxtkhrtqoowrme",password="c7602a59c8758ad0515037079e38be4e08cf7a7e44a42599e539359b2da9b9cb",host="ec2-54-225-106-93.compute-1.amazonaws.com",port="5432");
-createsql="create table product(id serial primary key,name varchar(50),price int)";
+import psycopg2; #postgresql
+import configparser; #讀取設定檔
+#讀取設定檔
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+#postgresql資料庫資訊
+database=config['Postgresql']['database'];
+user=config['Postgresql']['user'];
+password=config['Postgresql']['password'];
+host=config['Postgresql']['host'];
+port=config['Postgresql']['port'];
+
+conn=psycopg2.connect(database=database,user=user,password=password,host=host,port=port);
+createQuestion="create table if not exists question(id serial primary key,subject varchar(500),answer int)";
+createAnswer="create table if not exists answer(id serial primary key,content varchar(500))";
 cur=conn.cursor();
-cur.execute(createsql);
+cur.execute(createQuestion);
+cur.execute(createAnswer);
 conn.commit();
 conn.close();
-print("連線成功");
+print("create success");
