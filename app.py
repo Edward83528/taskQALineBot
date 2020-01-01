@@ -87,6 +87,7 @@ def handle_message(event):
                 txt=Olami().nli(msg) #用威聖電子API
         #txt=event.message.text;
     if status==1:
+    
         message = TextSendMessage(text=txt);
 
     line_bot_api.reply_message(
