@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage,FileMessage
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 )
 
 #創建一個falsk對象

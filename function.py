@@ -8,7 +8,13 @@ import json; #爬網站資料格式需要
 import requests; #爬網站資料需要
 import configparser; #讀取設定檔
 import psycopg2; #postgresql
+#透過dropbox上傳文件再回傳共享連結
+import dropbox
+import zipfile
+import os
+import sys
 from mailmerge import MailMerge #操作docx模板
+
 #from vectorizer import vect;
 #讀取設定檔
 config = configparser.ConfigParser()
@@ -122,7 +128,23 @@ def downdoc(templatePath,outputPath):
     place=u'逢甲大學正門口'
     )
     document.write(outputPath)
+    put_file(outputPath,'linebot.docx') #上傳到drobox
     return "輸出成功"
+def put_file(path, upload_name):
+    #drobox連結
+    TOKEN = "NSJy5sYYasAAAAAAAAAAOgfQGLsX92HAfP_TEGU-XxNEuYuIshdyLvSZgm4HpF_v"
+    dbx = dropbox.Dropbox(TOKEN)
+    dbx.users_get_current_account()
+    with open(path, "rb") as f:
+        dbx.files_upload(f.read(), "/{}".format(upload_name))
+def zip_file(file_path, zip_path):
+    #drobox連結
+    TOKEN = "NSJy5sYYasAAAAAAAAAAOgfQGLsX92HAfP_TEGU-XxNEuYuIshdyLvSZgm4HpF_v"
+    dbx = dropbox.Dropbox(TOKEN)
+    dbx.users_get_current_account()
+    ziph = zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED)
+    ziph.write(file_path)
+    ziph.close()
 #用字典的方式去抓關鍵字
 def getTextKey(text):
     content={
