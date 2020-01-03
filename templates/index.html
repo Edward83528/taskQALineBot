@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<style>
+
+</style>
+<body>
+    <div class="content_div">
+        <div>歡迎來到警局QA</div>
+        <form method="post" action="/main">
+            <input type="submit" value="送出" name="submit_btn">
+        </form>
+    </div>
+</body>
+</html>
