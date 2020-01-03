@@ -95,19 +95,19 @@ def handle_message(event):
         elif air==1:
             txt=function.getOpenData_pm25(msg);
             air=0;
-        elif doc==1:
-            if name!="":
+        elif doc>0:
+            if doc==1 and name!="":
                 name=msg
-                doc=1
+                doc=2
             else:
                 txt='請輸入您的姓名';
                 doc=1
-            if place!="":
+            if doc==2 and place!="":
                 place=msg
-                doc=1
+                doc=3
             else:
                 txt='請輸入事故地點';
-                doc=1
+                doc=2
             if name!="" and place!="":
                 docclass = doc1(name,place)  #建立一個實體
                 txt=function.downdoc("fileTemplates/template.docx","fileOutput/test.docx",docclass);
