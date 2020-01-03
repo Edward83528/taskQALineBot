@@ -8,8 +8,8 @@ import json; #爬網站資料格式需要
 import requests; #爬網站資料需要
 import configparser; #讀取設定檔
 import psycopg2; #postgresql
-from vectorizer import vect;
-
+from mailmerge import MailMerge #操作docx模板
+#from vectorizer import vect;
 #讀取設定檔
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -108,6 +108,21 @@ def classify_review(review,clf):
     proba = np.max(clf.predict_proba(X))
     #return Y,label_Y,proba
     return label_Y
+#前置處理要將word加入域
+#word欲插入處ctrl+F9>右鍵>編輯功能變數>類別:合併列印 功能變數名稱:MergeField 欄位名稱:變數名 格式:無
+#word模板插入值
+def downdoc(templatePath,outputPath):
+    template = templatePath
+    # 建立郵件合併文件並檢視所有欄位
+    document = MailMerge(template)
+    print("Fields included in {}: {}".format(template,document.get_merge_fields()))
+    #替換變數值
+    document.merge(
+    name=u'馬子狗',
+    place=u'逢甲大學正門口'
+    )
+    document.write(outputPath)
+    return "輸出成功"
 #用字典的方式去抓關鍵字
 def getTextKey(text):
     content={

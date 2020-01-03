@@ -1,7 +1,7 @@
 from flask import Flask, request, abort,render_template
 from nlp.olami import Olami #用威聖電子API
 import configparser #讀取設定檔
-import pickle
+#import pickle
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -23,7 +23,7 @@ line_bot_api = LineBotApi(config['Line']['token'])
 # Channel Secret
 handler = WebhookHandler(config['Line']['Channe_SECRET'])
 #載入分類模型(可替換)
-clf = pickle.load(open("pkl/classifier.pkl","rb"))
+#clf = pickle.load(open("pkl/classifier.pkl","rb"))
 
 #跳轉首頁
 @app.route("/")
@@ -70,9 +70,12 @@ def handle_message(event):
         air=1;
         txt='請輸入一個地區名稱(例如:大里)';
     elif "評論" in msg:
-        txt=function.classify_review(msg,clf);
+        #txt=function.classify_review(msg,clf);
+        txt='評論';
     elif "測試" in msg:
         txt=function.gettest();
+    elif "填表" in msg:
+        txt=function.downdoc("fileTemplates/template.docx","fileOutput/test.docx");
     else:
         if glasses==1:
             txt=function.getproduct(msg);

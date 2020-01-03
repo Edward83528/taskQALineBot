@@ -2,6 +2,6 @@ line-bot-sdk
 flask
 psycopg2
 matplotlib
-beautifulsoup4
 scikit-learn
 nltk
+docx-mailmerge
