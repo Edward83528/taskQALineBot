@@ -106,7 +106,7 @@ def handle_message(event):
                 place=msg
                 doc=3
             else:
-                txt='請輸入事故地點';
+                txt='請輸入事故地點'+str(doc)+','+str(place);
                 doc=2
             if name!="" and place!="":
                 docclass = doc1(name,place)  #建立一個實體
