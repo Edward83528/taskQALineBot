@@ -87,7 +87,7 @@ def handle_message(event):
     #填表之後要用圖表選單至能先用關鍵字測試
     elif "填表" in msg:
         doc=1;
-        txt='開始填表，請根據流程填入資料';
+        txt='開始填表，請先輸入您的姓名';
     else:
         if glasses==1:
             txt=function.getproduct(msg);
@@ -102,7 +102,13 @@ def handle_message(event):
             elif place=="":
                 txt='請輸入事故地點';
                 doc=1
-            else:
+            elif name!="":
+                name=msg
+                doc=1
+            elif place!="":
+                place=msg
+                doc=1
+            elif name!="" and place!="":
                 docclass = doc1(name,place)  #建立一個實體
                 txt=function.downdoc("fileTemplates/template.docx","fileOutput/test.docx",docclass);
                 doc=0;
