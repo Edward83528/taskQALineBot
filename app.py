@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage,FileMessage
 )
 
 #創建一個falsk對象
@@ -74,8 +74,11 @@ def handle_message(event):
         txt='評論';
     elif "測試" in msg:
         txt=function.gettest();
+    #填表之後要用圖表選單至能先用關鍵字測試
     elif "填表" in msg:
         txt=function.downdoc("fileTemplates/template.docx","fileOutput/test.docx");
+        message=FileMessage(file_name='fileOutput/test.docx')
+        status=2
     else:
         if glasses==1:
             txt=function.getproduct(msg);
