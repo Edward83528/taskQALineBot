@@ -108,7 +108,7 @@ def handle_message(event):
             else:
                 txt='請輸入事故地點'+str(doc)+','+str(place);
                 doc=2
-            if name!="" and place!="":
+            if doc==3 and name!="" and place!="":
                 docclass = doc1(name,place)  #建立一個實體
                 txt=function.downdoc("fileTemplates/template.docx","fileOutput/test.docx",docclass);
                 doc=0;
