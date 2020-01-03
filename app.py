@@ -50,17 +50,11 @@ def callback():
 
 glasses=0;
 air=0;
-doc=0;
-name=""
-place=""
 step=0
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     global glasses;
     global air;
-    global doc;
-    global name;
-    global place;
     global step;
     status=1;
     msg=event.message.text;
@@ -84,15 +78,12 @@ def handle_message(event):
     elif "評論" in msg:
         #txt=function.classify_review(msg,clf);
         txt='評論';
-    elif "填充" in msg:
+    #填表之後要用圖表選單至能先用關鍵字測試
+    elif "填表" in msg:
         txt,step=function.filling(step,msg);
         step=step;
     elif "測試" in msg:
         txt=function.gettest();
-    #填表之後要用圖表選單至能先用關鍵字測試
-    elif "填表" in msg:
-        doc=1;
-        txt='開始填表，請先輸入您的姓名';
     else:
         if glasses==1:
             txt=function.getproduct(msg);
@@ -102,24 +93,8 @@ def handle_message(event):
             air=0;
         elif step!=0:
             txt,step=function.filling(step,msg);
+            if step==3:step=0
             step=step;
-        elif doc>0:
-            if doc==1 and name=="":
-                name=msg
-                doc=2
-            else:
-                txt='請輸入您的姓名';
-                doc=1
-            if doc==2 and place=="":
-                place=msg
-                doc=3
-            else:
-                txt='請輸入事故地點'+str(doc)+','+str(place);
-                doc=2
-            if doc==3 and name!="" and place!="":
-                docclass = doc1(name,place)  #建立一個實體
-                txt=function.downdoc("fileTemplates/template.docx","fileOutput/test.docx",docclass);
-                doc=0;
         else:
             #txt=function.getTextKey(msg); # 用字典的方式去抓關鍵字
             txt=function.get_answer(msg) #用微軟qnamaker
