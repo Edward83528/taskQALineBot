@@ -96,13 +96,13 @@ def handle_message(event):
             txt=function.getOpenData_pm25(msg);
             air=0;
         elif doc>0:
-            if doc==1 and name!="":
+            if doc==1 and name=="":
                 name=msg
                 doc=2
             else:
                 txt='請輸入您的姓名';
                 doc=1
-            if doc==2 and place!="":
+            if doc==2 and place=="":
                 place=msg
                 doc=3
             else:
