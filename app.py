@@ -53,6 +53,7 @@ air=0;
 doc=0;
 name=""
 place=""
+step=0
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     global glasses;
@@ -60,6 +61,7 @@ def handle_message(event):
     global doc;
     global name;
     global place;
+    global step;
     status=1;
     msg=event.message.text;
     
@@ -82,6 +84,9 @@ def handle_message(event):
     elif "評論" in msg:
         #txt=function.classify_review(msg,clf);
         txt='評論';
+    elif "填充" in msg:
+        txt,step=function.filling(step,msg);
+        step=step;
     elif "測試" in msg:
         txt=function.gettest();
     #填表之後要用圖表選單至能先用關鍵字測試
@@ -95,6 +100,9 @@ def handle_message(event):
         elif air==1:
             txt=function.getOpenData_pm25(msg);
             air=0;
+        elif step!=0:
+            txt,step=function.filling(step,msg);
+            step=step;
         elif doc>0:
             if doc==1 and name=="":
                 name=msg

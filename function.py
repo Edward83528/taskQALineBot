@@ -25,6 +25,32 @@ password=config['Postgresql']['password'];
 host=config['Postgresql']['host'];
 port=config['Postgresql']['port'];
 
+name=""
+place=""
+
+class doc1():
+    def __init__(self, name='初始姓名',place='初始位置'):
+        self.name = name
+        self.place = place
+def filling(step,msg):
+    txt=""
+    global name;
+    global place;
+    if step==0:
+        txt="開始填表，請依照流程填表,請先填寫您的姓名"
+        step=step+1
+    elif step==1:
+        name=msg
+        txt="請填寫發生地點:"
+        step=step+1
+    elif step==2:
+        place=msg
+        txt="3"
+        step=step+1
+    else:
+        docclass = doc1(name,place)  #建立一個實體
+        txt=downdoc("fileTemplates/template.docx","fileOutput/test.docx",docclass);
+    return txt,step
 def getOpenData(url):
     return json.loads(requests.get(url,verify='False').text);
 def getOpenData_pm25(area):
