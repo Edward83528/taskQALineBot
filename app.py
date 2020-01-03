@@ -90,7 +90,7 @@ def handle_message(event):
             txt=function.getOpenData_pm25(msg);
             air=0;
         elif step!=0:
-            txt,step=function.filling(step,msg);
+            txt,step=function.downdoc(step,msg);
             if step==3:step=0
             step=step;
         else:
