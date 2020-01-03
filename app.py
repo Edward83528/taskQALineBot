@@ -53,22 +53,20 @@ air=0;
 step=0
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    #全域變數定義(為了實現多輪對話)
     global glasses;
     global air;
     global step;
-    status=1;
-    msg=event.message.text;
+    status=1;#訊息種類切換定義(1:文字 2:圖片)
     
-    class doc1():
-        def __init__(self, name='初始姓名',place='初始位置'):
-            self.name = name
-            self.place = place
+    msg=event.message.text; #接收文字訊息
+
     if "垃圾車" in msg:
         txt=function.getrubbishtruck();
     elif "蠟筆小新" in msg:
         message=ImageSendMessage(original_content_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3fsAvfV91zePne1n1RzxuxhnKyQEXUSEVFvYvZAiHqzPJUhlIJQ&s',
                                  preview_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3fsAvfV91zePne1n1RzxuxhnKyQEXUSEVFvYvZAiHqzPJUhlIJQ&s');
-        status=2;
+        status=2; #切換圖片類型
     elif "眼鏡" in msg:
         glasses=1;
         txt=function.getproduct();
@@ -78,9 +76,9 @@ def handle_message(event):
     elif "評論" in msg:
         #txt=function.classify_review(msg,clf);
         txt='評論';
-    #填表之後要用圖表選單至能先用關鍵字測試
+    #填表之後要用圖表選單致能，我先用關鍵字測試
     elif "填表" in msg:
-        txt,step=function.filling(step,msg);
+        txt,step=function.downdoc(step,msg);
         step=step;
     elif "測試" in msg:
         txt=function.gettest();
@@ -102,9 +100,7 @@ def handle_message(event):
                 txt=Olami().nli(msg) #用威聖電子API
         #txt=event.message.text;
     if status==1:
-    
         message = TextSendMessage(text=txt);
-
     line_bot_api.reply_message(
         event.reply_token,
         message)

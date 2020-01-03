@@ -9,11 +9,11 @@ import requests; #爬網站資料需要
 import configparser; #讀取設定檔
 import psycopg2; #postgresql
 import dropbox #透過dropbox上傳文件再回傳共享連結
-import zipfile
-import datetime
+import zipfile #壓縮檔案
+import datetime #時間
 from mailmerge import MailMerge #操作docx模板
-
 #from vectorizer import vect;
+
 #讀取設定檔
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -25,14 +25,16 @@ password=config['Postgresql']['password'];
 host=config['Postgresql']['host'];
 port=config['Postgresql']['port'];
 
+#模板填充變數
 name=""
 place=""
 
+#模板1類別定義
 class doc1():
     def __init__(self, name='初始姓名',place='初始位置'):
         self.name = name
         self.place = place
-def filling(step,msg):
+def downdoc(step,msg):
     txt=""
     global name;
     global place;
@@ -46,7 +48,7 @@ def filling(step,msg):
     elif step==2:
         place=msg
         docclass = doc1(name,place)  #建立一個實體
-        txt=downdoc("fileTemplates/template.docx","fileOutput/test.docx",docclass);
+        txt=docMerge(config['File']['intput'],config['File']['output'],docclass);
         step=step+1
     return txt,step
 def getOpenData(url):
@@ -139,7 +141,7 @@ def classify_review(review,clf):
 #前置處理要將word加入域
 #word欲插入處ctrl+F9>右鍵>編輯功能變數>類別:合併列印 功能變數名稱:MergeField 欄位名稱:變數名 格式:無
 #word模板插入值
-def downdoc(templatePath,outputPath,docClass):
+def docMerge(templatePath,outputPath,docClass):
     template = templatePath
     # 建立郵件合併文件並檢視所有欄位
     document = MailMerge(template)
@@ -154,8 +156,7 @@ def downdoc(templatePath,outputPath,docClass):
     shareLink=put_file(outputPath,uploaddFileName) #上傳到drobox
     return "已成功填寫完本檔案並存取於警局檔案中,您可透過以下連結觀看填寫檔案"+shareLink
 def put_file(path, upload_name):
-    #drobox連結
-    shareLink=''
+    shareLink='';#drobox共享連結
     TOKEN = config['Dropbox']['TOKEN']
     dbx = dropbox.Dropbox(TOKEN)
     dbx.users_get_current_account()
