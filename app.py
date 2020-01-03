@@ -50,6 +50,9 @@ def callback():
 
 glasses=0;
 air=0;
+doc=0;
+name=""
+place=""
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     global glasses;
@@ -57,9 +60,6 @@ def handle_message(event):
     global doc;
     global name;
     global place;
-    name=""
-    place=""
-    doc=0;
     status=1;
     msg=event.message.text;
     
