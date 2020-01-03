@@ -8,8 +8,7 @@ import json; #爬網站資料格式需要
 import requests; #爬網站資料需要
 import configparser; #讀取設定檔
 import psycopg2; #postgresql
-#透過dropbox上傳文件再回傳共享連結
-import dropbox
+import dropbox #透過dropbox上傳文件再回傳共享連結
 import zipfile
 import datetime
 from mailmerge import MailMerge #操作docx模板
@@ -129,11 +128,11 @@ def downdoc(templatePath,outputPath,docClass):
     document.write(outputPath)
     uploaddFileName=str(datetime.datetime.now())+'.docx'
     shareLink=put_file(outputPath,uploaddFileName) #上傳到drobox
-    return "已成功填寫完本檔案並存取於警局,您可透過以下連結觀看填寫檔案"+shareLink
+    return "已成功填寫完本檔案並存取於警局檔案中,您可透過以下連結觀看填寫檔案"+shareLink
 def put_file(path, upload_name):
-    shareLink=''
     #drobox連結
-    TOKEN = "NSJy5sYYasAAAAAAAAAAOgfQGLsX92HAfP_TEGU-XxNEuYuIshdyLvSZgm4HpF_v"
+    shareLink=''
+    TOKEN = config['Dropbox']['TOKEN']
     dbx = dropbox.Dropbox(TOKEN)
     dbx.users_get_current_account()
     with open(path, "rb") as f:
@@ -142,8 +141,7 @@ def put_file(path, upload_name):
         shareLink=shared_link_metadata.url
     return shareLink
 def zip_file(file_path, zip_path):
-    #drobox連結
-    TOKEN = "NSJy5sYYasAAAAAAAAAAOgfQGLsX92HAfP_TEGU-XxNEuYuIshdyLvSZgm4HpF_v"
+    TOKEN = config['Dropbox']['TOKEN']
     dbx = dropbox.Dropbox(TOKEN)
     dbx.users_get_current_account()
     ziph = zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED)
