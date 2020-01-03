@@ -1,8 +1,2 @@
 line-bot-sdk
 flask
-psycopg2
-matplotlib
-scikit-learn
-nltk
-docx-mailmerge
-dropbox
