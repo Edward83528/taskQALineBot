@@ -45,11 +45,9 @@ def filling(step,msg):
         step=step+1
     elif step==2:
         place=msg
-        txt="3"
-        step=step+1
-    else:
         docclass = doc1(name,place)  #建立一個實體
         txt=downdoc("fileTemplates/template.docx","fileOutput/test.docx",docclass);
+        step=step+1
     return txt,step
 def getOpenData(url):
     return json.loads(requests.get(url,verify='False').text);
