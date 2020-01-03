@@ -59,6 +59,7 @@ def handle_message(event):
     global place;
     name=""
     place=""
+    doc=0;
     status=1;
     msg=event.message.text;
     
