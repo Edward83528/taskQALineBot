@@ -34,6 +34,7 @@ class doc1():
     def __init__(self, name='初始姓名',place='初始位置'):
         self.name = name
         self.place = place
+        
 def downdoc(step,msg):
     txt=""
     global name;
@@ -179,3 +180,24 @@ def getTextKey(text):
             "空污":"請輸入空氣品質抓取",
             };
     return content.get(text,"我也不知道");
+
+def Description():
+    
+    content='';
+    content+="垃圾車:"+"\n";
+
+    return content;
+    
+    
+    
+#    try:
+#        message = TextSendMessage(  
+#            text = "我是 Linebot，\n您好！"
+#        )
+#        line_bot_api.reply_message(event.reply_token,message)
+#    except:
+#        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    
+    
+
+

@@ -82,6 +82,10 @@ def handle_message(event):
         step=step;
     elif "測試" in msg:
         txt=function.gettest();
+        
+    elif msg == '@使用說明' :
+        txt=function.Description();
+        
     else:
         if glasses==1:
             txt=function.getproduct(msg);
