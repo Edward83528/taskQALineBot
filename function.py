@@ -54,23 +54,31 @@ class doc1():
         self.name = name
         self.place = place
         
-def downdoc(step,msg):
-    txt=""
-    global name;
-    global place;
-    if step==0:
-        txt="開始填表，請依照流程填表,請先填寫您的姓名"
-        step=step+1
-    elif step==1:
-        name=msg
-        txt="請填寫發生地點:"
-        step=step+1
-    elif step==2:
-        place=msg
-        docclass = doc1(name,place)  #建立一個實體
-        txt=docMerge(config['File']['intput'],config['File']['output'],docclass);
-        step=step+1
-    return txt,step
+def downdoc(msg):
+#    txt=""
+#    global name;
+#    global place;
+#    if step==0:
+#        txt="開始填表，請依照流程填表,請先填寫您的姓名"
+#        step=step+1
+#    elif step==1:
+#        name=msg
+#        txt="請填寫發生地點:"
+#        step=step+1
+#    elif step==2:
+#        place=msg
+#        docclass = doc1(name,place)  #建立一個實體
+#        txt=docMerge(config['File']['intput'],config['File']['output'],docclass);
+#        step=step+1
+
+    
+    name = msg.split("###")[1].split("/")[0]
+    place = msg.split("###")[1].split("/")[2]
+    docclass = doc1(name,place)  #建立一個實體
+    txt=docMerge(config['File']['intput'],config['File']['output'],docclass);
+    
+    return txt
+
 def getOpenData(url):
     return json.loads(requests.get(url,verify='False').text);
 def getOpenData_pm25(area):

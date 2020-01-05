@@ -92,8 +92,8 @@ def handle_message(event):
         #txt=function.sendQuickreply(event);
         function.sendQuickreply(event);
         #line_bot_api.reply_message(event.reply_token,message);
-        
-        
+    elif msg == '###' :
+        txt=function.downdoc(msg);
     else:
         if glasses==1:
             txt=function.getproduct(msg);
@@ -101,10 +101,10 @@ def handle_message(event):
         elif air==1:
             txt=function.getOpenData_pm25(msg);
             air=0;
-        elif step!=0:
-            txt,step=function.downdoc(step,msg);
-            if step==3:step=0
-            step=step;
+#        elif step!=0:
+#            txt,step=function.downdoc(step,msg);
+#            if step==3:step=0
+#            step=step;
         else:
             #txt=function.getTextKey(msg); # 用字典的方式去抓關鍵字
             txt=function.get_answer(msg) #用微軟qnamaker
