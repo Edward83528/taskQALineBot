@@ -51,6 +51,7 @@ def callback():
 glasses=0;
 air=0;
 step=0
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     #全域變數定義(為了實現多輪對話)
@@ -85,6 +86,13 @@ def handle_message(event):
         
     elif msg == '@使用說明' :
         txt=function.Description();
+        
+        
+    elif msg == '@快速選單' :
+        #txt=function.sendQuickreply(event);
+        function.sendQuickreply(event);
+        #line_bot_api.reply_message(event.reply_token,message);
+        
         
     else:
         if glasses==1:

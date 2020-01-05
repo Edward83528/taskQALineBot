@@ -3,6 +3,25 @@
 API集
 @author: Zhong-wei
 """
+from linebot.models import ( MessageEvent, TextMessage, TextSendMessage, ImageSendMessage)
+from linebot.models import ( QuickReply, QuickReplyButton, MessageAction )
+
+
+
+
+from linebot import ( LineBotApi, WebhookHandler )
+import configparser #讀取設定檔
+#StickerSendMessage 
+#LocationSendMessage
+
+config = configparser.ConfigParser()    
+config.read('config.ini')
+
+
+line_bot_api = LineBotApi(config['Line']['token'])
+
+
+
 import numpy as np;
 import json; #爬網站資料格式需要
 import requests; #爬網站資料需要
@@ -184,21 +203,42 @@ def getTextKey(text):
 
 def Description():   #使用說明
     
-    content='';
-    content+="1.表單申請：\n\t貼心小幫手" + '"咪咪"' + "會協助您協助填寫表單資訊\n\n 2.線上檢舉：\n\t協助檢舉交通違規等異常項目,以減少交通違規事項\n\n" +  \
-                    "4.官網連結：\n\t連結台中市政府官方網站,了解更多即時消息\n\n 5.位置訊息：\n\t快速搜尋距離最近的派出所";
+    content =  '' ;
+    content += "1.表單申請：\n\t貼心小幫手" + '"咪咪"' + "會協助您協助填寫表單資訊\n\n2.線上檢舉：\n\t協助檢舉交通違規等異常項目,以減少交通違規事項\n\n" +  \
+                    "4.官網連結：\n\t連結台中市政府官方網站,了解更多即時消息\n\n5.位置訊息：\n\t快速搜尋距離最近的派出所";
 
     return content;
     
     
-    
-#    try:
-#        message = TextSendMessage(  
-#            text = "我是 Linebot，\n您好！"
-#        )
-#        line_bot_api.reply_message(event.reply_token,message)
-#    except:
-#        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+def sendQuickreply(event):  #快速選單(表單選擇)
+    try:
+        message = TextSendMessage(
+            text='請選擇最喜歡的程式語言',
+            quick_reply=QuickReply(
+                items=[
+                    QuickReplyButton(
+                        action=MessageAction(label="Python", text="Python")
+                    ),
+                    QuickReplyButton(
+                        action=MessageAction(label="Java", text="Java")
+                    ),
+                    QuickReplyButton(
+                        action=MessageAction(label="C#", text="C#")
+                    ),
+                    QuickReplyButton(
+                        action=MessageAction(label="Basic", text="Basic")
+                    ),
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token,message)
+    except:
+#        txt = ''
+#        txt = "錯誤";
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))    
+
+
+
     
     
 
