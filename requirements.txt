@@ -6,3 +6,6 @@ scikit-learn
 nltk
 docx-mailmerge
 dropbox
+python-dotenv
+oauth2client
+gspread

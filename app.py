@@ -91,7 +91,10 @@ def handle_message(event):
     elif msg == '@快速填表' :
         function.sendQuickreply(event);
         #line_bot_api.reply_message(event.reply_token,message);
-    
+    elif msg == '@線上檢舉':
+        txt = 'line://app/1653659137-VEqkzQQl'
+    elif "交通違規檢舉" in msg:
+        function.handleTraffic(event, msg)
     elif '###' in msg :
         txt=function.downdoc(msg);
         

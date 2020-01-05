@@ -30,7 +30,9 @@ import psycopg2; #postgresql
 import dropbox #透過dropbox上傳文件再回傳共享連結
 import zipfile #壓縮檔案
 import datetime #時間
+import gspread # google sheet
 from mailmerge import MailMerge #操作docx模板
+from oauth2client.service_account import ServiceAccountCredentials 
 #from vectorizer import vect;
 
 #讀取設定檔
@@ -252,4 +254,28 @@ def fillform(event):  #傳送文字
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     
 
+
+def handleTraffic(event, msg):
+    try:
+        auth_json_path = './LineBot.json' #由剛剛建立出的憑證，放置相同目錄以供引入
+        gss_scopes = ['https://spreadsheets.google.com/feeds'] #我們想要取用的範圍
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(auth_json_path, gss_scopes)
+        gss_client = gspread.authorize(credentials)
+
+        trafficData = requests.get('https://spreadsheets.google.com/feeds/list/1iob37Z7NBMYByge-2Cd0iw0nCxqhRdo2U2LgTQwYn5M/1/public/values?alt=json').json()['feed']['entry']
+        newRow = len(trafficData) + 1
+
+        #從剛剛建立的sheet，把網址中 https://docs.google.com/spreadsheets/d/〔key〕/edit 的 〔key〕的值代入 
+        spreadsheet_key_path = '1iob37Z7NBMYByge-2Cd0iw0nCxqhRdo2U2LgTQwYn5M'
+
+        #我們透過open_by_key這個method來開啟sheet
+        sheet = gss_client.open_by_key(spreadsheet_key_path).sheet1
+        
+        #透過insert_row寫入值
+        sheet.insert_row(msg.split(": ")[1].split("/"), newRow)
+
+        line_bot_api.reply_message(event.reply_token, '填寫完成！')
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+    
 
