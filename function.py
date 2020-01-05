@@ -228,11 +228,9 @@ def sendQuickreply(event):  #快速選單(表單選擇)
                         action=MessageAction(label="道路交通事故申請", text="@事故申請書")
                     ),
                     QuickReplyButton(
-                        action=MessageAction(label="Java", text="Java")
+                        action=MessageAction(label="集會遊行相關申請", text="@集會申請書")
                     ),
-                    QuickReplyButton(
-                        action=MessageAction(label="C#", text="C#")
-                    ),
+#申請集會遊行相關申請表格
                 ]
             )
         )
@@ -244,7 +242,14 @@ def sendQuickreply(event):  #快速選單(表單選擇)
 
 
 
-    
+def fillform(event):  #傳送文字
+    try:
+        message = TextSendMessage(  
+            text = "道路事故申請表單" + "line://app/1653537575-EJzvaX6j"
+        )
+        line_bot_api.reply_message(event.reply_token,message)
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     
 
 

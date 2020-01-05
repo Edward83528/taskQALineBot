@@ -78,9 +78,8 @@ def handle_message(event):
         #txt=function.classify_review(msg,clf);
         txt='評論';
     #填表之後要用圖表選單致能，我先用關鍵字測試
-    elif "事故申請書" in msg:
-        txt,step=function.downdoc(step,msg);
-        step=step;
+    elif msg == "@事故申請書":
+        func.fillform(event)
         
     elif "測試" in msg:
         txt=function.gettest();
@@ -89,8 +88,7 @@ def handle_message(event):
         txt=function.Description();
         
         
-    elif msg == '@快速選單' :
-        #txt=function.sendQuickreply(event);
+    elif msg == '@快速填表' :
         function.sendQuickreply(event);
         #line_bot_api.reply_message(event.reply_token,message);
     
