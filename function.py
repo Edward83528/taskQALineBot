@@ -221,20 +221,17 @@ def Description():   #使用說明
 def sendQuickreply(event):  #快速選單(表單選擇)
     try:
         message = TextSendMessage(
-            text='請選擇最喜歡的程式語言',
+            text='您好!我是咪咪,很高興為您服務,請選擇想要填寫的表單',
             quick_reply=QuickReply(
                 items=[
                     QuickReplyButton(
-                        action=MessageAction(label="Python", text="Python")
+                        action=MessageAction(label="道路交通事故申請", text="@事故申請書")
                     ),
                     QuickReplyButton(
                         action=MessageAction(label="Java", text="Java")
                     ),
                     QuickReplyButton(
                         action=MessageAction(label="C#", text="C#")
-                    ),
-                    QuickReplyButton(
-                        action=MessageAction(label="Basic", text="Basic")
                     ),
                 ]
             )

@@ -78,9 +78,10 @@ def handle_message(event):
         #txt=function.classify_review(msg,clf);
         txt='評論';
     #填表之後要用圖表選單致能，我先用關鍵字測試
-    elif "填表" in msg:
+    elif "事故申請書" in msg:
         txt,step=function.downdoc(step,msg);
         step=step;
+        
     elif "測試" in msg:
         txt=function.gettest();
         
@@ -92,8 +93,10 @@ def handle_message(event):
         #txt=function.sendQuickreply(event);
         function.sendQuickreply(event);
         #line_bot_api.reply_message(event.reply_token,message);
-    elif msg == '###' :
+    
+    elif '###' in msg :
         txt=function.downdoc(msg);
+        
     else:
         if glasses==1:
             txt=function.getproduct(msg);
