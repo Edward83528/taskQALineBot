@@ -181,10 +181,11 @@ def getTextKey(text):
             };
     return content.get(text,"我也不知道");
 
-def Description():
+
+def Description():   #使用說明
     
     content='';
-    content+="垃圾車:"+"\n";
+    content+="1.表單申請：\n\t可協助填寫表單資訊\n\n\n 2.線上檢舉：\n\t 可檢舉交通違規等異常項目 " ;
 
     return content;
     
