@@ -79,7 +79,7 @@ def handle_message(event):
         txt='評論';
     #填表之後要用圖表選單致能，我先用關鍵字測試
     elif msg == "@事故申請書":
-        func.fillform(event)
+        function.fillform(event)
         
     elif "測試" in msg:
         txt=function.gettest();
