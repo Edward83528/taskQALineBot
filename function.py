@@ -273,6 +273,6 @@ def handleTraffic(event, msg):
     #透過insert_row寫入值
     sheet.insert_row(msg.split(": ")[1].split("/"), newRow)
 
-    line_bot_api.reply_message(event.reply_token, '填寫完成！')
+    line_bot_api.reply_message(event.reply_token, text='填寫完成！'))
     
 
