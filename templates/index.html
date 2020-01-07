@@ -1,19 +1,115 @@
 <!DOCTYPE html>
 <html lang="ch">
-<head>
-    <meta charset="UTF-8">
-    <title>index</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-</head>
-<style>
+    <head>
+        <meta charset="UTF-8">
+        <title>index</title>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    </head>
+    <body>
 
-</style>
-<body>
-    <div class="content_div">
-        <div>歡迎來到警局QA</div>
-        <form method="post" action="/main">
-            <input type="submit" value="送出" name="submit_btn">
-        </form>
-    </div>
-</body>
+        <div id="login" class="container" style="text-align: center;">    
+            <div style="margin-top:50px; display: inline-block; border: 1px solid #999; margin: 100px; padding: 20px 15px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">線上違規檢舉表單系統</div>
+                    </div>     
+
+                    <div style="padding-top:30px" class="panel-body" >
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                        <form id="loginform" class="form-horizontal" role="form">
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="username" type="text" class="form-control" name="username" value="" placeholder="請輸入帳號">                                        
+                            </div>
+                                
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="password" type="password" class="form-control" name="password" placeholder="請輸入密碼">
+                            </div>
+
+                            <div style="margin-top:10px" class="form-group">
+                                <!-- Button -->
+
+                                <div class="col-sm-12 controls">
+                                    <div
+                                        id="btn-login"
+                                        class="btn btn-success"
+                                        onclick="submit()"
+                                    >
+                                        登入
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>                     
+                </div>  
+            </div>
+        </div>
+    </body>
+
+    <script language="javascript">
+        function getList() {
+            var requestURL = 'https://spreadsheets.google.com/feeds/list/1iob37Z7NBMYByge-2Cd0iw0nCxqhRdo2U2LgTQwYn5M/1/public/values?alt=json';
+            var body = document.getElementsByTagName('body')[0];
+            var tbl = document.createElement('table');
+
+            tbl.style.width = '100%';
+            tbl.setAttribute('border', '1');
+            var tbdy = document.createElement('tbody');
+
+            $.getJSON( requestURL, {
+                tags: "mount rainier",
+                tagmode: "any",
+                format: "json"
+            })
+            .done(function( data ) {
+                data.feed.entry.forEach((i) => {
+                    var tr = document.createElement('tr');
+
+                    Object.keys(i).forEach((subI) => {
+
+                        if(subI.indexOf('gsx$') !== -1) {
+                            var td = document.createElement('td');
+
+                            td.appendChild(document.createTextNode(i[subI]['$t']))
+                            i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+                            tr.appendChild(td)
+                        }
+                    })
+                    tbdy.appendChild(tr);
+                })
+            });
+            
+            tbl.appendChild(tbdy);
+            body.appendChild(tbl)
+        }
+
+        function submit() {
+            var name = $('#username').val() || '--';
+            var password = $('#password').val() || '--';
+
+            if (name === 'admin' && password === '123') {
+                window.localStorage.setItem('isLogin', true);
+                getList();
+            } else {
+                alert("請輸入正確帳號或密碼")
+            }
+        }
+
+        function init() {
+            var isLogin = JSON.parse(window.localStorage.getItem('isLogin'));
+console.log('isLogin', isLogin)
+            if (isLogin) {
+                getList();
+                document.getElementById("login").style.display = "none";
+            } else {
+                document.getElementById("login").remove();
+            }
+            document.getElementById("login").style.display = "none";
+        }
+        init();
+    </script>
 </html>
