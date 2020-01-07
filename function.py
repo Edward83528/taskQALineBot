@@ -7,8 +7,6 @@ from linebot.models import ( MessageEvent, TextMessage, TextSendMessage, ImageSe
 from linebot.models import ( QuickReply, QuickReplyButton, MessageAction )
 
 
-
-
 from linebot import ( LineBotApi, WebhookHandler )
 import configparser #讀取設定檔
 #StickerSendMessage 
