@@ -92,7 +92,8 @@
             var password = $('#password').val() || '--';
 
             if (name === 'admin' && password === '123') {
-                window.localStorage.setItem('isLogin', true);
+                // window.localStorage.setItem('isLogin', true);
+                document.getElementById("login").style.display = "none";
                 getList();
             } else {
                 alert("請輸入正確帳號或密碼")
@@ -100,15 +101,14 @@
         }
 
         function init() {
-            var isLogin = JSON.parse(window.localStorage.getItem('isLogin'));
-console.log('isLogin', isLogin)
-            if (isLogin) {
-                getList();
-                document.getElementById("login").style.display = "none";
-            } else {
-                document.getElementById("login").remove();
-            }
-            document.getElementById("login").style.display = "none";
+            // var isLogin = JSON.parse(window.localStorage.getItem('isLogin'));
+
+            // if (isLogin) {
+            //     getList();
+            //     document.getElementById("login").style.display = "none";
+            // } else {
+            //     document.getElementById("login").remove();
+            // }
         }
         init();
     </script>
