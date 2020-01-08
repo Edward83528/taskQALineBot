@@ -86,6 +86,6 @@ class Olami:
         elif type == 'selection':
             return handle_selection_type(desc['type'])
         elif type == 'ds':
-            return desc['result'] + '\n請用 /help 指令看看我能怎麼幫助您'
+            return desc['result'] + '\n,您可透過圖表選單操作咪咪主要功能,也可以問我問題,例如天氣、空氣、道路申請、家暴......等'
         else:
             return desc['result']

@@ -5,20 +5,13 @@ API集
 """
 from linebot.models import ( MessageEvent, TextMessage, TextSendMessage, ImageSendMessage)
 from linebot.models import ( QuickReply, QuickReplyButton, MessageAction )
-
-
 from linebot import ( LineBotApi, WebhookHandler )
 import configparser #讀取設定檔
-#StickerSendMessage 
-#LocationSendMessage
 
 config = configparser.ConfigParser()    
 config.read('config.ini')
 
-
 line_bot_api = LineBotApi(config['Line']['token'])
-
-
 
 import numpy as np;
 import json; #爬網站資料格式需要
@@ -71,7 +64,6 @@ def downdoc(msg):
 #        txt=docMerge(config['File']['intput'],config['File']['output'],docclass);
 #        step=step+1
 
-    
     name = msg.split("###")[1].split("/")[0]
     place = msg.split("###")[1].split("/")[2]
     docclass = doc1(name,place)  #建立一個實體
@@ -213,11 +205,10 @@ def Description():   #使用說明
     
     content =  '' ;
     content += "1.表單申請：\n\t貼心小幫手" + '"咪咪"' + "會協助您協助填寫表單資訊\n\n2.線上檢舉：\n\t協助檢舉交通違規等異常項目,以減少交通違規事項\n\n" +  \
-                    "4.官網連結：\n\t連結台中市政府官方網站,了解更多即時消息\n\n5.位置訊息：\n\t快速搜尋距離最近的派出所";
+                    "4.官網連結：\n\t連結台中警察局官方網站,了解更多即時消息\n\n5.位置訊息：\n\t快速搜尋距離最近的派出所";
 
     return content;
-    
-    
+ 
 def sendQuickreply(event):  #快速選單(表單選擇)
     try:
         message = TextSendMessage(
@@ -230,29 +221,22 @@ def sendQuickreply(event):  #快速選單(表單選擇)
                     QuickReplyButton(
                         action=MessageAction(label="集會遊行相關申請", text="@集會申請書")
                     ),
-#申請集會遊行相關申請表格
                 ]
             )
         )
         line_bot_api.reply_message(event.reply_token,message)
     except:
-#        txt = ''
-#        txt = "錯誤";
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))    
 
-
-
-def fillform(event):  #傳送文字
+def fillform(event,txt):  #傳送文字
     try:
         message = TextSendMessage(  
-            text = "道路事故申請表單" + "line://app/1653537575-EJzvaX6j"
+            text = txt + "line://app/1653537575-EJzvaX6j"
         )
         line_bot_api.reply_message(event.reply_token,message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
     
-
-
 def handleTraffic(event, msg):
     auth_json_path = './LineBot.json' #由剛剛建立出的憑證，放置相同目錄以供引入
     gss_scopes = ['https://spreadsheets.google.com/feeds'] #我們想要取用的範圍

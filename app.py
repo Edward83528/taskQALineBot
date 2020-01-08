@@ -77,27 +77,21 @@ def handle_message(event):
     elif "評論" in msg:
         #txt=function.classify_review(msg,clf);
         txt='評論';
-    #填表之後要用圖表選單致能，我先用關鍵字測試
-    elif msg == "@事故申請書":
-        function.fillform(event)
-        
-    elif "測試" in msg:
-        txt=function.gettest();
-        
     elif msg == '@使用說明' :
         txt=function.Description();
-        
-        
     elif msg == '@快速填表' :
         function.sendQuickreply(event);
         #line_bot_api.reply_message(event.reply_token,message);
+    elif msg == "@事故申請書":
+        function.fillform(event,'道路事故申請表單')
+	elif msg == "@集會申請書":
+        function.fillform(event,'集會申請表單')
     elif msg == '@線上檢舉':
         txt = 'line://app/1653632802-3X6ymq4Y'
     elif "交通違規檢舉" in msg:
         function.handleTraffic(event, msg)
     elif '###' in msg :
         txt=function.downdoc(msg);
-        
     else:
         if glasses==1:
             txt=function.getproduct(msg);
