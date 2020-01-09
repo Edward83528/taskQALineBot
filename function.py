@@ -243,11 +243,11 @@ def handleTraffic(event, msg):
     credentials = ServiceAccountCredentials.from_json_keyfile_name(auth_json_path, gss_scopes)
     gss_client = gspread.authorize(credentials)
 
-    trafficData = requests.get('https://spreadsheets.google.com/feeds/list/1iob37Z7NBMYByge-2Cd0iw0nCxqhRdo2U2LgTQwYn5M/1/public/values?alt=json').json()['feed']['entry']
+    trafficData = requests.get(config['Googleforms']['url']).json()['feed']['entry']
     newRow = len(trafficData) + 1
 
     #從剛剛建立的sheet，把網址中 https://docs.google.com/spreadsheets/d/〔key〕/edit 的 〔key〕的值代入 
-    spreadsheet_key_path = '1iob37Z7NBMYByge-2Cd0iw0nCxqhRdo2U2LgTQwYn5M'
+    spreadsheet_key_path = config['Googleforms']['key']
 
     #我們透過open_by_key這個method來開啟sheet
     sheet = gss_client.open_by_key(spreadsheet_key_path).sheet1
