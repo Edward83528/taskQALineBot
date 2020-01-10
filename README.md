@@ -23,11 +23,11 @@
     Channel >Create a channel> Messaging API>依據欄位填值創出一個Bot
     Webhook settings 狀態打開
     並查出以下資訊
-        *  Channel ID :
-        *  Channel secret(沒有的話點選Issue):
-        *  token:
-        *  Webhook URL(https://{Heroku_app_name}.herokuapp.com/callback):
-        *  Basic ID:
+*  Channel ID
+*  Channel secret(沒有的話點選Issue)
+*  token
+*  Webhook URL(https://{Heroku_app_name}.herokuapp.com/callback)
+*  Basic ID
 ## 建置步驟4(下載版更程式):
     安裝 Git與Heroku CLI
     Git:
@@ -54,6 +54,6 @@
     $ heroku logs --tail
 ## 建置步驟6(Line Managerg刪除自動回覆機制):
     最後再到Line Manager頁面將Auto reply message資料全部刪除，這樣才可以將使用者送的訊息透過python後台處理，回丟訊息給使用者。
-    ![image](https://github.com/harry83528/taskQALineBot/blob/master/messageImage_1578626946104.jpg)
+![image](https://github.com/harry83528/taskQALineBot/blob/master/messageImage_1578626946104.jpg)
 
 
