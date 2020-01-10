@@ -11,3 +11,6 @@
     fileOutput資料夾:存放輸出檔案
     templates資料夾:存放html模板
     static資料夾:存放靜態檔案css、js等
+##建置步驟1:
+        因為使用Heroku平台,所以要先到Heroku網站建立帳號
+        Heroku網址:https://dashboard.heroku.com
