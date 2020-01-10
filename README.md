@@ -13,7 +13,7 @@
     static資料夾:存放靜態檔案css、js等
 ## 建置步驟1(申請Heroku帳號):
     因為使用Heroku平台,所以要先到Heroku網站建立帳號
-    Heroku網址:<https://dashboard.heroku.com/>
+Heroku網址:<https://dashboard.heroku.com/>
 ## 建置步驟2(創建Heroku APP):
     heroku登入後首頁new>create new app 依照網頁步驟建置您自己的APP,並記住您自己的App名稱
 ## 建置步驟3(建立Line bot):
