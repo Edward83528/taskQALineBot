@@ -55,3 +55,20 @@ Heroku CLI:<https://devcenter.heroku.com/articles/heroku-cli#windows>
     最後再到Line Manager頁面將Auto reply message資料全部刪除，這樣才可以將使用者送的訊息透過python後台處理，回丟訊息給使用者。
 ![image](https://github.com/harry83528/taskQALineBot/blob/master/messageImage_1578626946104.jpg)
 
+'''
+#前置處理要將word加入域
+#word欲插入處ctrl+F9>右鍵>編輯功能變數>類別:合併列印 功能變數名稱:MergeField 欄位名稱:變數名 格式:無
+#word模板插入值
+def docMerge(templatePath,outputPath,docClass):
+    template = templatePath
+    # 建立郵件合併文件並檢視所有欄位
+    document = MailMerge(template)
+    print("Fields included in {}: {}".format(template,document.get_merge_fields()))
+    #替換變數值
+    document.merge(
+    name= docClass.name,
+    place=docClass.place
+    )
+    document.write(outputPath)
+    uploaddFileName=str(datetime.datetime.now())+'.docx'
+'''
