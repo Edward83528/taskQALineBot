@@ -116,8 +116,7 @@ def get_answer(message_text):
         return "不好意思，系統發生錯誤，請稍後再試"
 ```
 # reference
-*
-*
-*
-*
-*
+* https://medium.com/@zaoldyeck/%E5%88%A9%E7%94%A8-olami-open-api-%E7%82%BA-chatbot-%E5%A2%9E%E5%8A%A0-nlp-%E5%8A%9F%E8%83%BD-e6b37940913d?
+* https://medium.com/@skywalker0803r/%E6%A5%B5%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%80%E5%80%8B%E5%9F%BA%E6%9C%AC%E7%9A%84%E8%81%8A%E5%A4%A9%E6%A9%9F%E5%99%A8%E4%BA%BAlinebot-python-qnamaker-ngrok-ddd757fbbedf
+* https://www.dropbox.com/developers/documentation/http/overview
+* https://www.itread01.com/content/1548054189.html
