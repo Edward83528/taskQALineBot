@@ -5,7 +5,7 @@
 # 檔案說明
     Procfile:宣告多種程序的類型（執行的程式種類）的檔案
     app.py:主程式
-    config.ini:設定檔
+    config.ini:設定檔(本專案設定值已清空，請填入您們自己的設定值)
     function.py:自定義函數檔
     requirements.txt:已安裝模組名稱,根據 requirements.txt 列表安裝模組
     runtime.txt:告知python版本
