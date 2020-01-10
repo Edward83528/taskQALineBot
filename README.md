@@ -57,11 +57,12 @@ Heroku CLI:<https://devcenter.heroku.com/articles/heroku-cli#windows>
 ## 建置步驟6(Line Managerg刪除自動回覆機制):
     最後再到Line Manager頁面將Auto reply message資料全部刪除，這樣才可以將使用者送的訊息透過python後台處理，回丟訊息給使用者。
 ![image](https://github.com/harry83528/taskQALineBot/blob/master/messageImage_1578626946104.jpg)
-
+# 重要程式碼解說
+## 填充WORD模板變數
+    要事先將word加入域的設定，加的方法如下：
+    word打開>欲插入處ctrl+F9 反灰>並按右鍵>編輯功能變數>類別:合併列印/功能變數名稱:MergeField/欄位名稱:自定義變數名/格式:無>確定
 ```python
-#前置處理要將word加入域
-#word欲插入處ctrl+F9>右鍵>編輯功能變數>類別:合併列印 功能變數名稱:MergeField 欄位名稱:變數名 格式:無
-#word模板插入值
+#word模板插入值(templatePath:模板路徑/outputPath:檔案輸出路徑/docClass:填充變數的類別)
 def docMerge(templatePath,outputPath,docClass):
     template = templatePath
     # 建立郵件合併文件並檢視所有欄位
@@ -75,22 +76,23 @@ def docMerge(templatePath,outputPath,docClass):
     document.write(outputPath)
     uploaddFileName=str(datetime.datetime.now())+'.docx'
 ```
-
+## Droxbox檔案上傳
 ```python
+#將檔案上傳到Droxbox並回傳共享連結(path:將要上傳的檔案路徑/upload_name:上傳到drobox的檔名)
 def put_file(path, upload_name):
-    shareLink='';#drobox共享連結
+    shareLink='';#drobox共享連結宣告
     TOKEN = config['Dropbox']['TOKEN']
     dbx = dropbox.Dropbox(TOKEN)
     dbx.users_get_current_account()
     with open(path, "rb") as f:
-        dbx.files_upload(f.read(), "/{}".format(upload_name))
-        shared_link_metadata = dbx.sharing_create_shared_link_with_settings('/'+upload_name)
-        shareLink=shared_link_metadata.url
+        dbx.files_upload(f.read(), "/{}".format(upload_name))　#上傳檔案
+        shared_link_metadata = dbx.sharing_create_shared_link_with_settings('/'+upload_name)　#開啟共享
+        shareLink=shared_link_metadata.url　#共享連結
     return shareLink
 ```
-
+## 微軟qnamaker介接
 ```python
-#介接微軟qnamaker
+#介接微軟qnamaker(message_text:line使用者鍵入文字)
 def get_answer(message_text):
     url = config['Qnamaker']['url']
     # 發送request到QnAMaker Endpoint要答案
