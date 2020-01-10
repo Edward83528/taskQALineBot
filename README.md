@@ -31,11 +31,8 @@ Heroku網址:<https://dashboard.heroku.com/>
 *  Basic ID
 ## 建置步驟4(下載版更程式):
     安裝 Git與Heroku CLI
-    Git:
-    https://backlog.com/git-tutorial/tw/intro/intro2_1.html
-    Heroku CLI:
-    https://devcenter.heroku.com/articles/heroku-cli#windows
-    然後點 64-bit 下載安裝檔，下載後點開。
+Git:<https://backlog.com/git-tutorial/tw/intro/intro2_1.html>
+Heroku CLI:<https://devcenter.heroku.com/articles/heroku-cli#windows>
 ## 建置步驟5(版更指令):
     下載本git專案到您的電腦,假設您下載路徑為D:\webapps\taskbot\
     安裝好後cmd Cd到上傳資料夾(專案資料夾)，並打以下指令
