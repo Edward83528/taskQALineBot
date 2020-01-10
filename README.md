@@ -85,3 +85,28 @@ def put_file(path, upload_name):
         shareLink=shared_link_metadata.url
     return shareLink
 ```
+
+```python
+#介接微軟qnamaker
+def get_answer(message_text):
+    url = config['Qnamaker']['url']
+    # 發送request到QnAMaker Endpoint要答案
+    response = requests.post(
+                   url,
+                   json.dumps({'question': message_text}),
+                   headers={
+                       'Content-Type': 'application/json',
+                       'Authorization': config['Qnamaker']['Authorization']
+                   }
+               )
+    data = response.json()
+    try: 
+        #我們使用免費service可能會超過限制（一秒可以發的request數）
+        if "error" in data:
+            return data["error"]["message"]
+        #這裡我們預設取第一個答案
+        answer = data['answers'][0]['answer']
+        return answer
+    except Exception:
+        return "不好意思，系統發生錯誤，請稍後再試"
+```
