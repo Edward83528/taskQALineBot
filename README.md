@@ -51,5 +51,7 @@
     $ cd "Heroku APP名稱"
     錯誤想看log:
     $ heroku logs --tail
+## 建置步驟6(Line Managerg刪除自動回覆機制):
+    最後再到Line Manager頁面將Auto reply message資料全部刪除，這樣才可以將使用者送的訊息透過python後台處理，回丟訊息給使用者。
 
 
