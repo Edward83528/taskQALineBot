@@ -68,7 +68,7 @@ def docMerge(templatePath,outputPath,docClass):
     # 建立郵件合併文件並檢視所有欄位
     document = MailMerge(template)
     print("Fields included in {}: {}".format(template,document.get_merge_fields()))
-    #替換變數值
+    #替換變數值(要根據您自己的模板變數值增加或修改以下變數值)
     document.merge(
     name= docClass.name,
     place=docClass.place
