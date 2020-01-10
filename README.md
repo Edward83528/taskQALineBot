@@ -15,10 +15,11 @@
     因為使用Heroku平台,所以要先到Heroku網站建立帳號
     Heroku網址:https://dashboard.heroku.com
 ## 建置步驟2(創建Heroku APP):
-    heroku登入後首頁new>create new app 建置您自己的APP
+    heroku登入後首頁new>create new app 依照網頁步驟建置您自己的APP,並記住您自己的App名稱
 ## 建置步驟3(建立Line bot):
+    到Line開發者網站建置Line bot
     網址:https://developers.line.biz/en/
-    ine帳號登入> Providers>Create創造提供者
+    Line帳號登入> Providers>Create創造提供者
     Channel >Create a channel> Messaging API>依據欄位填值創出一個Bot
     Webhook settings 狀態打開
     並查出以下資訊
