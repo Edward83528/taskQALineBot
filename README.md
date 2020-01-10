@@ -25,7 +25,7 @@ Heroku網址:<https://dashboard.heroku.com/>
     網址:https://developers.line.biz/en/
     Line帳號登入> Providers>Create創造提供者
     Channel >Create a channel> Messaging API>依據欄位填值創出一個Bot
-    Webhook settings 狀態打開並查出以下資訊
+    Webhook settings 狀態打開並查出以下資訊(並記在自己的筆記本文件)
 ![image](https://github.com/harry83528/taskQALineBot/blob/master/messageImage_1578628507824.jpg)
 
 *  Channel ID
@@ -33,7 +33,7 @@ Heroku網址:<https://dashboard.heroku.com/>
 *  token
 *  Webhook URL(https://{Heroku_app_name}.herokuapp.com/callback)
 *  Basic ID
-## 建置步驟4(下載版更程式):
+## 建置步驟4(下載版更軟體):
     安裝 Git與Heroku CLI
 Git:<https://backlog.com/git-tutorial/tw/intro/intro2_1.html> <br>
 Heroku CLI:<https://devcenter.heroku.com/articles/heroku-cli#windows>
