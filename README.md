@@ -72,3 +72,16 @@ def docMerge(templatePath,outputPath,docClass):
     document.write(outputPath)
     uploaddFileName=str(datetime.datetime.now())+'.docx'
 ```
+
+```python
+def put_file(path, upload_name):
+    shareLink='';#drobox共享連結
+    TOKEN = config['Dropbox']['TOKEN']
+    dbx = dropbox.Dropbox(TOKEN)
+    dbx.users_get_current_account()
+    with open(path, "rb") as f:
+        dbx.files_upload(f.read(), "/{}".format(upload_name))
+        shared_link_metadata = dbx.sharing_create_shared_link_with_settings('/'+upload_name)
+        shareLink=shared_link_metadata.url
+    return shareLink
+```
