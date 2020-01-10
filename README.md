@@ -27,4 +27,29 @@
     token:
     Webhook URL(https://{Heroku_app_name}.herokuapp.com/callback):
     Basic ID:
+## 建置步驟4(下載版更程式):
+    安裝 Git與Heroku CLI
+    Git:
+    https://backlog.com/git-tutorial/tw/intro/intro2_1.html
+    Heroku CLI:
+    https://devcenter.heroku.com/articles/heroku-cli#windows
+    然後點 64-bit 下載安裝檔，下載後點開。
+## 建置步驟5(版更指令):
+    下載本git專案到您的電腦,假設您下載路徑為D:\webapps\taskbot\
+    安裝好後cmd Cd到上傳資料夾(專案資料夾)，並打以下指令
+    D:\webapps\taskbot>
+    $ heroku login
+    $ git init
+    $ heroku git:remote -a "Heroku APP名稱"
+    上述步驟版更第一次才要做，當之後程式有修改，重做下列3個步驟就好
+    $ git add .
+    $ git commit -m "版更敘述文字"
+    $ git push heroku master
+    如果要重新clone下來的步驟:
+    $ heroku login
+    $ heroku git:clone -a "Heroku APP名稱"
+    $ cd "Heroku APP名稱"
+    錯誤想看log:
+    $ heroku logs --tail
+
 
