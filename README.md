@@ -6,3 +6,8 @@
     function.py:自定義函數檔
     requirements.txt:已安裝模組名稱,根據 requirements.txt 列表安裝模組
     runtime.txt:告知python版本
+    nlp資料夾:存放介接威聖電子股份有限公司API的檔案
+    fileTemplates資料夾:存放word模板
+    fileOutput資料夾:存放輸出檔案
+    templates資料夾:存放html模板
+    static資料夾:存放靜態檔案css、js等
