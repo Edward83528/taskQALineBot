@@ -11,6 +11,7 @@
     fileOutput資料夾:存放輸出檔案
     templates資料夾:存放html模板
     static資料夾:存放靜態檔案css、js等
+# 以下為建置步驟,下載本git專案並根據步驟1到6即可成功建置
 ## 建置步驟1(申請Heroku帳號):
     因為使用Heroku平台,所以要先到Heroku網站建立帳號
 Heroku網址:<https://dashboard.heroku.com/>
