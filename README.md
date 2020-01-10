@@ -23,11 +23,11 @@
     Channel >Create a channel> Messaging API>依據欄位填值創出一個Bot
     Webhook settings 狀態打開
     並查出以下資訊
-    Channel ID :
-    Channel secret(沒有的話點選Issue):
-    token:
-    Webhook URL(https://{Heroku_app_name}.herokuapp.com/callback):
-    Basic ID:
+    *   Channel ID :
+    *   Channel secret(沒有的話點選Issue):
+    *   token:
+    *   Webhook URL(https://{Heroku_app_name}.herokuapp.com/callback):
+    *   Basic ID:
 ## 建置步驟4(下載版更程式):
     安裝 Git與Heroku CLI
     Git:
