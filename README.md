@@ -11,6 +11,20 @@
     fileOutput資料夾:存放輸出檔案
     templates資料夾:存放html模板
     static資料夾:存放靜態檔案css、js等
-## 建置步驟1:
-        因為使用Heroku平台,所以要先到Heroku網站建立帳號
-        Heroku網址:https://dashboard.heroku.com
+## 建置步驟1(申請Heroku帳號):
+    因為使用Heroku平台,所以要先到Heroku網站建立帳號
+    Heroku網址:https://dashboard.heroku.com
+## 建置步驟2(創建Heroku APP):
+    heroku登入後首頁new>create new app 建置您自己的APP
+## 建置步驟3(建立Line bot):
+    網址:https://developers.line.biz/en/
+    ine帳號登入> Providers>Create創造提供者
+    Channel >Create a channel> Messaging API>依據欄位填值創出一個Bot
+    Webhook settings 狀態打開
+    並查出以下資訊
+    Channel ID :
+    Channel secret(沒有的話點選Issue):
+    token:
+    Webhook URL(https://{Heroku_app_name}.herokuapp.com/callback):
+    Basic ID:
+
